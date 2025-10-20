@@ -1,0 +1,7 @@
+/home/ep/mnt/mvc/bin/Release/net9.0/publish/mvc
+/home/ep/mnt/mvc/bin/Release/net9.0/publish/appsettings.Development.json
+/home/ep/mnt/mvc/bin/Release/net9.0/publish/appsettings.json
+/home/ep/mnt/mvc/bin/Release/net9.0/publish/mvc.dll
+/home/ep/mnt/mvc/bin/Release/net9.0/publish/mvc.deps.json
+/home/ep/mnt/mvc/bin/Release/net9.0/publish/mvc.runtimeconfig.json
+/home/ep/mnt/mvc/bin/Release/net9.0/publish/mvc.pdb

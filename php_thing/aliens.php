@@ -26,7 +26,7 @@ if (!in_array($_SESSION['role'], ['agent', 'group_leader', 'admin'])) {
 }
 
 // Add alien
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_alien'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_alien']) && $_SESSION['role'] !== 'agent') {
    try {
         $stmt = $pdo->prepare("CALL c24elipe.sp_app_create_alien(?, ?, ?, ?, ?, ?)");
         $stmt->execute([

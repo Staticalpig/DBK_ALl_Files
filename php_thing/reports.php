@@ -17,12 +17,12 @@ try {
     $pdo = login_specific_db($_SESSION['db_user'], $_SESSION['db_pass']);
     $reports = [];
     if ($_SESSION['role'] === 'agent') {
-        $reports = $pdo->prepare("SELECT * FROM vw_test_rapport WHERE Användarnamn = ?");
+        $reports = $pdo->prepare("SELECT * FROM vw_get_full_rapport WHERE Användarnamn = ?");
         $reports->execute([$_SESSION['username']]);
         $reports = $reports->fetchAll(PDO::FETCH_ASSOC);
     }
     else{
-        $reports = $pdo->query("SELECT * FROM vw_test_rapport;")->fetchAll(PDO::FETCH_ASSOC);
+        $reports = $pdo->query("SELECT * FROM vw_get_full_rapport;")->fetchAll(PDO::FETCH_ASSOC);
     }
 } catch (Exception $e) {
     http_response_code(500);

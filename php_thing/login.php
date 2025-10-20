@@ -50,11 +50,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 break;
             case 'group_leader':
                 $_SESSION['db_user'] = 'c24elipe_groupleader';
-                $_SESSION['db_pass'] = 'GroupPass123';
+                $_SESSION['db_pass'] = 'GroupPass123!';
                 break;
             default:
                 $_SESSION['db_user'] = 'c24elipe_agent';
-                $_SESSION['db_pass'] = 'AgentPass123';
+                $_SESSION['db_pass'] = 'AgentPass123!';
         }
 
         $_SESSION['username'] = $username;
