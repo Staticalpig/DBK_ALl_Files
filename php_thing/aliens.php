@@ -87,6 +87,13 @@ try {
     <?php endforeach; ?>
 </table>
 
+<h3>Söl efter en Alien</h3>
+<form method="GET">
+    <input name="PNR"  type="text" required />
+    <input type="submit" value="Sök">
+</form>
+
+<?php if ($_SESSION['role'] !== 'agent'): ?>
 <h3>Lägg till ny Alien</h3>
 <form method="POST">
     <input name="PNR" placeholder="PNR" required>
@@ -109,6 +116,8 @@ try {
     </select>
     <button name="add_alien">Lägg till</button>
 </form>
+
+<?php endif; ?>
 
 <style>
     .highlighted-row {

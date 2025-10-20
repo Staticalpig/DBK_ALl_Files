@@ -19,7 +19,7 @@ else {
         <a href="incidents.php">Incidenter</a> |
     <?php endif; ?>
     <a href="reports.php">Rapporter</a> |
-    <?php if (in_array($role, ['group_leader', 'admin'])): ?>
+    <?php if (in_array($role, ['admin'])): ?>
         <a href="archive.php">Arkiv</a> |
     <?php endif; ?>
     <a href="logout.php">Logga ut</a>

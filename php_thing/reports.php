@@ -29,41 +29,6 @@ try {
     exit('Connection error: ' . htmlspecialchars($e->getMessage()));
 }
 
-
-
-/*function getReportCommentsHTML($pdo, $datum, $nr): string
-{
-    $statment = $pdo->prepare("select * from wv_Rapport_Kommentar_Full 
-                                where Rapport_Datum = ? 
-                                  and Rapport_Nr = ?;");
-    $statment->execute([$datum, $nr]);
-    $comments = $statment->fetchAll(PDO::FETCH_ASSOC);
-
-    if (!$comments) {
-        return "<tr><td>Inga kommentarer hittades för denna rapport.</td></tr>";
-    }
-
-    $html = "<tr><th>Kommentarer</th></tr>";
-
-    $html .= "<td><h3>Lägg till kommentar:</h3>
-               
-    <form method='POST''>
-                        <textarea name='comment_text' rows='4' cols='50' required></textarea><br>
-                        <input type='submit' value='Lägg till kommentar'>
-                    </form>
-                </td></tr>";
-
-    foreach ($comments as $comment) {
-        $html .= "<tr><td>";
-        $html .= "<p><strong>" . htmlspecialchars($comment['GjordAv']) . " skrev:</strong></p>";
-        $html .= "<p>" . htmlspecialchars($comment['Text']) . "</p>";
-        $html .= "</td></tr>";
-    }
-
-
-    return $html;
-}
-*/
 function getReportCommentsHTML($pdo, $datum, $nr):string
 {
     $statement = $pdo->prepare("
@@ -315,10 +280,6 @@ if (!empty($_POST['comment_text'])) {
     $reportNr = $explode[count($explode)-1] ?? null;
 
     try {
-        //    IN p_Rapport_Datum DATE,
-        //    IN p_Rapport_Nr INT UNSIGNED,
-        //    IN p_Text VARCHAR(500),
-        //    IN p_UserName VARCHAR(10)
         $insertComment->execute([
             $reportDatum,
             $reportNr,
