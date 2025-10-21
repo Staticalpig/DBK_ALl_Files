@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "gH4QNHjUSmE=",
+  "success": true,
+  "projectFilePath": "/home/ep/mnt/PLEASE_CONNECT/PLEASE_CONNECT.csproj",
+  "expectedPackageFiles": [
+    "/home/ep/.nuget/packages/dapper/2.1.66/dapper.2.1.66.nupkg.sha512",
+    "/home/ep/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/8.0.2/microsoft.extensions.dependencyinjection.abstractions.8.0.2.nupkg.sha512",
+    "/home/ep/.nuget/packages/microsoft.extensions.logging.abstractions/8.0.2/microsoft.extensions.logging.abstractions.8.0.2.nupkg.sha512",
+    "/home/ep/.nuget/packages/mysqlconnector/2.4.0/mysqlconnector.2.4.0.nupkg.sha512"
+  ],
+  "logs": []
+}

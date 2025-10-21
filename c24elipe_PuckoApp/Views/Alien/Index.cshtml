@@ -1,0 +1,111 @@
+@model c24elipe_PuckoApp.Models.AlienViewModel
+@{
+    ViewData["Title"] = "Aliens";
+    Layout = "_Layout";
+}
+
+<style>
+    .highlighted-row {
+        background-color: yellow;
+        font-weight: bold;
+    }
+</style>
+
+<h2>Aliens</h2>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+}
+
+<table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th>PNR</th>
+        <th>Alias</th>
+        <th>Ras</th>
+        <th>Farlighet</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var a in Model.Aliens)
+    {
+        // Check if the current alien's PNR matches the searched PNR
+        string highlightClass = (Model.SearchedPNR == a.PNR) ? "highlighted-row" : "";
+        
+        <tr class="@highlightClass">
+            <td>@a.PNR</td>
+            <td>@a.Alias</td>
+            <td>@a.RasNamn</td>
+            <td>@a.Farlighet</td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<h3>Sök efter en Alien</h3>
+<form method="GET" asp-controller="Alien" asp-action="Index" class="form-inline mb-4">
+    <div class="form-group mr-2">
+        <label for="pnr" class="sr-only">PNR</label>
+        <input name="pnr" id="pnr" type="text" class="form-control" placeholder="Ange PNR" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Sök</button>
+</form>
+
+@if (Context.Session.GetString("Role") != "agent")
+{
+    <h3>Lägg till ny Alien</h3>
+    <form method="POST" asp-controller="Alien" asp-action="Create">
+        @Html.AntiForgeryToken()
+        
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label asp-for="NewAlien.PNR"></label>
+                <input asp-for="NewAlien.PNR" class="form-control" placeholder="PNR" required>
+            </div>
+            <div class="form-group col-md-4">
+                <label asp-for="NewAlien.Ras"></label>
+                <select asp-for="NewAlien.Ras" asp-items="Model.Races" class="form-control">
+                    <option value="Okänd">Okänd</option>
+                </select>
+            </div>
+            <div class="form-group col-md-4">
+                <label asp-for="NewAlien.Hemplanet"></label>
+                <input asp-for="NewAlien.Hemplanet" class="form-control" placeholder="Hemplanet">
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label asp-for="NewAlien.KändaNamn"></label>
+                <input asp-for="NewAlien.KändaNamn" class="form-control" placeholder="Kända namn">
+            </div>
+            <div class="form-group col-md-4">
+                <label asp-for="NewAlien.ÄrRegistrerad">Är Registrerad</label>
+                <select asp-for="NewAlien.ÄrRegistrerad" class="form-control">
+                    <option value="true">Ja</option>
+                    <option value="false">Nej</option>
+                </select>
+            </div>
+            <div class="form-group col-md-4">
+                <label asp-for="NewAlien.Farlighet"></label>
+                <select asp-for="NewAlien.Farlighet" class="form-control">
+                    <option value="Harmlös">Harmlös</option>
+                    <option value="Halvt harmlös">Halvt harmlös</option>
+                    <option value="Ofarlig">Ofarlig</option>
+                    <option value="Neutral">Neutral</option>
+                    <option value="Svagt farlig">Svagt farlig</option>
+                    <option value="Farlig">Farlig</option>
+                    <option value="Extremt farlig">Extremt farlig</option>
+                    <option value="Spring för livet">Spring för livet</option>
+                </select>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-success">Lägg till Alien</button>
+    </form>
+}

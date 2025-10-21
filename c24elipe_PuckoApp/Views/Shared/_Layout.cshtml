@@ -21,11 +21,48 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Index</a>
                         </li>
+                        
+                        @if (Context.Session.GetString("IsLoggedIn") == "true")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Alien" asp-action="Index">Aliens</a>
+                            </li>
+                        }
+                        @if (Context.Session.GetString("IsLoggedIn") == "true")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Reports" asp-action="Login">reports</a>
+                            </li>
+                        }
+                        
+                        @if(Context.Session.GetString("Role") != null && Context.Session.GetString("Role") != "agent")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Incident" asp-action="Index">incidents</a>
+                            </li>
+                        }
+                        
+                        @if(Context.Session.GetString("Role") == "admin")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">archive</a>
+                            </li>
+                        }
+                        
+                        @if (Context.Session.GetString("IsLoggedIn") != "true" )
+                        {
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="Index">Login</a>
                         </li>
+                        }
+                        else if (Context.Session.GetString("IsLoggedIn") == "true")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="Logout">Logout</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>

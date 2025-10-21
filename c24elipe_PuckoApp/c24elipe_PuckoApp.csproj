@@ -4,6 +4,16 @@
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>f883f218-70dd-4112-9ac6-4bd507ac3e6c</UserSecretsId>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+    <PackageReference Include="MySql.data" Version="9.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\Incident\" />
+  </ItemGroup>
 
 </Project>

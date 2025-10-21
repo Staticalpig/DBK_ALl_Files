@@ -1,0 +1,40 @@
+@model IEnumerable<PLEASE_CONNECT.Models.User>
+
+@{
+    ViewData["Title"] = "All Users";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<hr />
+
+@if (ViewData["Error"] != null)
+{
+    <div class="alert alert-danger">
+        <strong>Database Error:</strong> @ViewData["Error"]
+    </div>
+}
+else if (!Model.Any())
+{
+    <p>No aliens found in the database.</p>
+}
+else
+{
+    <table class="table table-striped table-bordered">
+        <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Username)</th>
+            <th>@Html.DisplayNameFor(model => model.Password)</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var alien in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => alien.Username)</td>
+                <td>@Html.DisplayFor(modelItem => alien.Password)</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}

@@ -1,0 +1,50 @@
+@model IEnumerable<PLEASE_CONNECT.Models.Alien>
+
+@{
+    ViewData["Title"] = "All Aliens";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<hr />
+
+@if (ViewData["Error"] != null)
+{
+    <div class="alert alert-danger">
+        <strong>Database Error:</strong> @ViewData["Error"]
+    </div>
+}
+else if (!Model.Any())
+{
+    <p>No aliens found in the database.</p>
+}
+else
+{
+    <table class="table table-striped table-bordered">
+        <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.IdKod)</th>
+            <th>@Html.DisplayNameFor(model => model.PNR)</th>
+            <th>@Html.DisplayNameFor(model => model.Ras)</th>
+            <th>@Html.DisplayNameFor(model => model.Hemplanet)</th>
+            <th>@Html.DisplayNameFor(model => model.KändaNamn)</th>
+            <th>@Html.DisplayNameFor(model => model.ÄrRegistrerad)</th>
+            <th>@Html.DisplayNameFor(model => model.Farlighet)</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var alien in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => alien.IdKod)</td>
+                <td>@Html.DisplayFor(modelItem => alien.PNR)</td>
+                <td>@Html.DisplayFor(modelItem => alien.Ras)</td>
+                <td>@Html.DisplayFor(modelItem => alien.Hemplanet)</td>
+                <td>@Html.DisplayFor(modelItem => alien.KändaNamn)</td>
+                <td>@Html.DisplayFor(modelItem => alien.ÄrRegistrerad)</td>
+                <td>@Html.DisplayFor(modelItem => alien.Farlighet)</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}

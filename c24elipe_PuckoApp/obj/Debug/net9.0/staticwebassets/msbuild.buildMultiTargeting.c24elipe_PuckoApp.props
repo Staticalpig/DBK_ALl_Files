@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../build/c24elipe_PuckoApp.props" />
+</Project>
