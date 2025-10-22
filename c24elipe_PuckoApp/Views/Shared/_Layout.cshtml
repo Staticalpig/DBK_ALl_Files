@@ -30,17 +30,18 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Alien" asp-action="Index">Aliens</a>
                             </li>
                         }
-                        @if (Context.Session.GetString("IsLoggedIn") == "true")
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Reports" asp-action="Login">reports</a>
-                            </li>
-                        }
                         
                         @if(Context.Session.GetString("Role") != null && Context.Session.GetString("Role") != "agent")
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Incident" asp-action="Index">incidents</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Incident" asp-action="Index">Incidents</a>
+                            </li>
+                        }
+                        
+                        @if (Context.Session.GetString("IsLoggedIn") == "true")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Raports" asp-action="Index">Reports</a>
                             </li>
                         }
                         

@@ -6,7 +6,6 @@ namespace c24elipe_PuckoApp.Controllers;
 
 public class AuthController(ILogger<AuthController> logger, IConfiguration config) : Controller
 {
-    private readonly ILogger<AuthController> _logger = logger;
 
     [HttpGet]
     public IActionResult Index()
@@ -24,13 +23,27 @@ public class AuthController(ILogger<AuthController> logger, IConfiguration confi
             ViewBag.Message = "Please enter both username and password.";
             return View();
         }
-
-        UserDbCredentialsModel userDbCredentialsModel = new UserDbCredentialsModel(config);
-        string hashedPasswordTable = userDbCredentialsModel.GetUserHashedPassword(username);
+        
+        UserDbCredentialsModel userDbCredentialsModel;
+        string hashedPasswordTable;   
+        
+        try
+        {
+            userDbCredentialsModel = new UserDbCredentialsModel(config);
+            hashedPasswordTable = userDbCredentialsModel.GetUserHashedPassword(username);
+        }
+        
+        catch (Exception e)
+        {
+            TempData["ErrorMessage"] = "An error occurred while processing your request. Please try again later.";
+            logger.LogError(e, "Error retrieving hashed password for user: " + username);
+            return View();
+        }
         
         if (string.IsNullOrEmpty(hashedPasswordTable))
         {
-            ViewBag.Message = "Invalid username or password.";
+            TempData["ErrorMessage"] = "Invalid username or password.";
+            logger.LogWarning("Login failed for non-existent user: " + username);
             return View();
         }
 
@@ -38,7 +51,8 @@ public class AuthController(ILogger<AuthController> logger, IConfiguration confi
 
         if (!isPasswordValid)
         {
-            ViewBag.Message = "Invalid username or password.";
+            TempData["ErrorMessage"] = "Invalid username or password.";
+            logger.LogWarning("Login failed for user: " + username + " due to incorrect password.");
             return View();
         }
         
@@ -49,7 +63,9 @@ public class AuthController(ILogger<AuthController> logger, IConfiguration confi
 
         if (fornamn == string.Empty || role == string.Empty)
         {
-            ViewBag.Message = "Error retrieving user details.";
+            TempData["ErrorMessage"] = "Error retrieving user details.";
+            logger.LogError("User details incomplete for user: " + username + ". Fornamn or role is empty.");
+            
             return View();
         }
 

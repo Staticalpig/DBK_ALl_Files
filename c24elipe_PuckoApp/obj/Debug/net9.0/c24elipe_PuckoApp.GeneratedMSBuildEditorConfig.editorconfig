@@ -40,6 +40,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Qcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[/home/ep/mnt/c24elipe_PuckoApp/Views/Incident/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSW5jaWRlbnQvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ep/mnt/c24elipe_PuckoApp/Views/Raport/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmFwb3J0L0luZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [/home/ep/mnt/c24elipe_PuckoApp/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0Vycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 

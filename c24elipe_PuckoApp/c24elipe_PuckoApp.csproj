@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Incident\" />
+    <Folder Include="Models\Raport\" />
   </ItemGroup>
 
 </Project>

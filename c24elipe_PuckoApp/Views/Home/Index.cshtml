@@ -4,14 +4,20 @@
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
 
 
-@if (Context.Session.GetString("Fornamn") != null)
+@if (Context.Session.GetString("IsLoggedIn") != null && Context.Session.GetString("IsLoggedIn") == "true")
 {
     <div class="text-center">
-        <h2>Hello, @Context.Session.GetString("Fornamn")!</h2>
-        <p>Du är @Context.Session.GetString("Role")</p>
+        <h2 class="display-5">Hello, @Context.Session.GetString("Fornamn")!</h2>
+        <p class="display-6">Du är en <span class="text-black-50"> @Context.Session.GetString("Role")</span></p>
     </div>
 }
+else
+{ 
+    <div  class="text-center"> 
+        <h2 class="display-6">Please log in to access more features.</h2>
+    </div>
+}
+

@@ -53,7 +53,9 @@
         <label for="pnr" class="sr-only">PNR</label>
         <input name="pnr" id="pnr" type="text" class="form-control" placeholder="Ange PNR" required />
     </div>
-    <button type="submit" class="btn btn-primary">Sök</button>
+    <div class="form-group mt-2">
+        <button type="submit" class="btn btn-primary">Sök</button>
+    </div>
 </form>
 
 @if (Context.Session.GetString("Role") != "agent")
@@ -105,7 +107,8 @@
                 </select>
             </div>
         </div>
-
-        <button type="submit" class="btn btn-success">Lägg till Alien</button>
+        <div class="form-group m-2">
+            <button type="submit" class="btn btn-success">Lägg till Alien</button>
+        </div>
     </form>
 }

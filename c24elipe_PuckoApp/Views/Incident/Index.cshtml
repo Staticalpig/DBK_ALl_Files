@@ -1,0 +1,111 @@
+@model IEnumerable<c24elipe_PuckoApp.Models.Incident.IncidentViewModel>
+
+
+@{
+    ViewData["Title"] = "Login Page";
+    Layout = "_Layout";
+}
+
+<h1>Alla Incidenter</h1>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+}
+
+<table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th>Incident Namn</th>
+        <th>NR</th>
+        <th>Säkerhetsgrad</th>
+        <th>Inblandade Aliens</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var incident in Model)
+    {
+        <tr>
+            <td>@incident.Namn</td>
+            <td>@incident.NR</td>
+            <td>@incident.Sakerhetsgrad</td>
+            <td>
+                @foreach (var alien in incident.Aliens){
+                    <div class="border-2 border-black">
+                        <a href="@Url.Action("Index", "Alien", new { PNR = alien.PNR })" class="text-decoration-none text-dark">
+                            <table class="table table-bordered table-striped m-2">
+                                <tr>
+                                    <td>@alien.PNR</td>
+                                </tr>
+                                <tr>
+                                    <td>@alien.Alias</td>
+                                </tr>
+                            </table>
+                        </a>
+                    </div>
+                }
+            </td>
+        </tr>
+    }
+    </tbody>    
+</table>
+
+<div class="mt-5 border-black border-2 pb-1 pt-1">   
+    <h2>Skapa ny Incident</h2>
+    <form method="POST" action="@Url.Action("CreateIncident", "Incident")">
+        
+        <label for="Namn">Incidentnamn:</label>
+        <input name="Namn" id="Namn" placeholder="Incidentnamn" required class="form-control"/>
+        <br/>
+        <label for="NR">Number:</label>
+        <input name="NR" id="NR" type="number" required class="form-control"/>
+        <br/>
+
+        <label>Säkerhetsgrad</label>
+        <select name="Sakerhetsgrad" class="form-select" required>
+            <option value="Oproblematisk" selected="selected">Oproblematisk</option>
+            <option value="Låg">Låg</option>
+            <option value="Mellan">Mellan</option>
+            <option value="Hög">Hög</option>
+            <option value="Mycket hög">Mycket hög</option>
+            <option value="Kritisk">Kritisk</option>
+        </select>
+
+        <button class="btn btn-primary mt-2">Skapa</button>
+    </form>
+</div>
+
+@if(Context.Session.GetString("Role") == "group_leader" || Context.Session.GetString("Role") == "admin")
+{
+    <div class="mt-5 mb-5 border-black border-2 pb-1 pt-1 ">   
+        <h2>Lägg till Alien i Incident</h2>
+        <form method="POST" action="@Url.Action("AddAlienToIncident", "Incident")">
+            
+            <label for="Incident">Incident NR:</label>
+            <select name="Incident" id="Incident" class="form-select" required>
+                @foreach (var incident in Model)
+                {
+                    <option value="@incident.Namn - @incident.NR">@incident.Namn - @incident.NR</option>
+                }
+            </select>
+            <br/>
+            <label for="AlienPNR">Alien PNR:</label>
+            <select name="AlienPNR" id="AlienPNR" class="form-select" required>
+                @foreach (var incident in Model)
+                {
+                    @foreach (var alien in incident.Aliens)
+                    {
+                        <option value="@alien.PNR">@alien.PNR - @alien.Alias</option>
+                    }
+                }
+            </select>
+            <br/>
+
+            <button class="btn btn-success mt-2">Lägg till Alien</button>
+        </form>
+    </div>
+}
