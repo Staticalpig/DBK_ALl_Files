@@ -12,8 +12,4 @@
     <PackageReference Include="MySql.data" Version="9.4.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\Raport\" />
-  </ItemGroup>
-
 </Project>
