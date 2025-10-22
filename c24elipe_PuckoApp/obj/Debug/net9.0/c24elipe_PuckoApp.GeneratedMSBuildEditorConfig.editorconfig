@@ -24,6 +24,10 @@ build_property.EnableCodeStyleSeverity =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWxpZW4vSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[/home/ep/mnt/c24elipe_PuckoApp/Views/Archive/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQXJjaGl2ZS9JbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [/home/ep/mnt/c24elipe_PuckoApp/Views/Auth/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQXV0aC9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

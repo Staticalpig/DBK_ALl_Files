@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("c24elipe_PuckoApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ecce2e044e5ef75efbcf5edd3dc2b29100655e6e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+23b9230428b085c09923d0c343eea937d67a183d")]
 [assembly: System.Reflection.AssemblyProductAttribute("c24elipe_PuckoApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("c24elipe_PuckoApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

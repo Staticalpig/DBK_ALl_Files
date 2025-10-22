@@ -1,0 +1,27 @@
+@{
+    ViewData["Title"] = "Archive Page";
+    Layout = "_Layout";
+}
+
+
+<h2>Archive Page</h2>
+<p>Welcome to the Archive Page. This is a placeholder view.</p>
+
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+}
+
+<div class="mt-4">
+    <a asp-controller="Archive" asp-action="ArchiveRapport" class="btn btn-primary">Archive old rapports</a>
+</div>
+
+<div class="mt-4">
+    <a asp-controller="Archive" asp-action="ArchiveAlien" class="btn btn-secondary">Archive unused aliens</a>
+</div>
