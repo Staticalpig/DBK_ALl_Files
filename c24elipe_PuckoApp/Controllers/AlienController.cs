@@ -31,44 +31,38 @@ public class AlienController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> Index(string pnr) // pnr is for the search/highlight
+    public async Task<IActionResult> Index(string pnr) 
     {
         if (!IsAuthorized(out string? role))
         {
-            // Redirect to login with a message, like the PHP script
-            return RedirectToAction("Index", "Home", new { 
-                redirected = true, 
-                reason = "Du måste logga in med rätt behörighet." 
-            });
+
+            TempData["ErrorMessage"] = "Du måste logga in med rätt behörighet.";
+            return RedirectToAction("Index", "Home");
         }
 
         try
         {
             AlienDbModel alienDbModel = new AlienDbModel(_config, role!);
             
-            // Use the main ViewModel
             var viewModel = new AlienViewModel
             {
-                // Get all aliens
                 Aliens = await alienDbModel.GetAllAliensAsync(),
                 
-                // Get races for the dropdown (only if user is not an agent)
+
                 Races = (role != "agent") ? await alienDbModel.GetAlienRacesAsync() : new(),
                 
-                // Pass the searched PNR to the view for highlighting
-                SearchedPNR = pnr 
+                SearchedPNR = pnr
             };
 
             return View(viewModel);
         }
         catch (Exception e)
         {
-            // Handle DB connection errors or other issues
+          
             return StatusCode(500, $"Connection error: {e.Message}");
         }
     }
     
-    // This action replaces SearchByPNR and handles the POST for adding an alien
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(AlienViewModel model)
@@ -77,14 +71,12 @@ public class AlienController : Controller
         {
             return RedirectToAction("Index", "Home");
         }
-
-        // Role check: Only group_leader and admin can add aliens
+        
         if (role == "agent")
         {
-            return Forbid(); // 403 Forbidden
+            return Forbid(); 
         }
         
-        // Bind the form data from the main view model
         var newAlien = model.NewAlien; 
 
         if (ModelState.IsValid)
@@ -104,8 +96,8 @@ public class AlienController : Controller
         {
             TempData["ErrorMessage"] = "Formuläret är felaktigt ifyllt.";
         }
-
-        // Post-Redirect-Get pattern: Redirect back to the Index action
+        
+        
         return RedirectToAction("Index");
     }
 }

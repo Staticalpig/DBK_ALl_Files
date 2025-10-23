@@ -32,17 +32,27 @@
     </tr>
     </thead>
     <tbody>
+    
     @foreach (var a in Model.Aliens)
     {
-        // Check if the current alien's PNR matches the searched PNR
-        string highlightClass = (Model.SearchedPNR == a.PNR) ? "highlighted-row" : "";
-        
-        <tr class="@highlightClass">
-            <td>@a.PNR</td>
-            <td>@a.Alias</td>
-            <td>@a.RasNamn</td>
-            <td>@a.Farlighet</td>
-        </tr>
+        if (string.Equals(a.PNR, Model.SearchedPNR, StringComparison.OrdinalIgnoreCase) && !string.IsNullOrEmpty(Model.SearchedPNR))
+        {
+            <tr class="highlighted-row">
+                <td>@a.PNR</td>
+                <td>@a.Alias</td>
+                <td>@a.RasNamn</td>
+                <td>@a.Farlighet</td>
+            </tr>
+        }
+        else if (string.IsNullOrEmpty(Model.SearchedPNR)) 
+        {
+            <tr>
+                <td>@a.PNR</td>
+                <td>@a.Alias</td>
+                <td>@a.RasNamn</td>
+                <td>@a.Farlighet</td>
+            </tr>         
+        }
     }
     </tbody>
 </table>
