@@ -125,19 +125,70 @@
                         </form>
                     }
                     <table>
-                        @foreach (var rad in @Model.SelectedRadder)
+                        @foreach (var rad in Model.SelectedRadder)
                         {
                             <tr>
                                 <td>
-                                    <p>@rad.Text</p>
+                                    <form method="post" asp-action="EnableRadEditing" asp-controller="Rapport">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="RapportDatum" value="@Model.SelectedReport.Datum" />
+                                        <input type="hidden" name="RapportNr" value="@Model.SelectedReport.Nr" />
+                                        <input type="hidden" name="RadId" value="@rad.Nr" />
+                                        <button type="submit" name="RadText" value="@rad.Text" class="btn btn-link text-left">
+                                            @rad.Text
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                         }
                     </table>
                 </div>
             </td>
+            <td>
+                <div>
+                    @foreach (var comment in Model.SelectedComments)
+                    {
+                        <div class="border-black border-1 mb-2 p-1">
+                            <p>@comment.Text</p>
+                            <small>By: @comment.GjordAvNamn at @comment.Rapport_Datum</small>
+                        </div>
+                    }
+                    @if (Context.Session.GetString("Role") != "agent")
+                    {
+                        <form method="POST" asp-action="AddNewComment" asp-controller="Rapport" class="border-1 border-black p-2 ">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="RapportDatum" value="@Model.SelectedReport.Datum.ToString("o")"/>
+                            <input type="hidden" name="RapportNr" value="@Model.SelectedReport.Nr"/>
+
+                            <textarea name="CommentText" class="w-100 mb-2" rows="4">Add a comment</textarea>
+                            <button type="submit" class="btn btn-primary">Add Comment</button>
+                        </form>
+                    }
+                </div>
+            </td>
         </tr>
     </tbody>
         
     </table>
+}
+
+
+@if (ViewBag.EnableRadEditing == true && ViewBag.SelectedRadId != null)
+{
+    <div class="border-black border-2 p-2">
+        <h3>Selected Rad</h3>
+        <form method="post" asp-action="UpdateRad" asp-controller="Rapport">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="RapportDatum" value="@ViewBag.RapportDatum" />
+            <input type="hidden" name="RapportNr" value="@ViewBag.RapportNr" />
+            <input type="hidden" name="RadId" value="@ViewBag.SelectedRadId" />
+            
+            <textarea name="RadText" class="w-100 mb-2" rows="4">@ViewBag.SelectedRadText</textarea>
+            
+            <label for="Delete">Delete the rad: </label>
+            <input type="checkbox" id="Delete" name="DeleteRad" value="true" />
+            
+            <button class="btn btn-primary" type="submit">Update Rad</button>
+        </form>
+    </div>
 }

@@ -191,4 +191,108 @@ public class RapportRepository
         _logger.LogInformation("New rapport rad created successfully for Rapport Nr: {RapportNr}.", rapportNr);
     
     }
+    
+    public async Task CreateNewComment(DateTime rapportDatum, int rapportNr, string text, string gjordAv, string userRole)
+    {
+        _logger .LogInformation(
+            "->>>>> Creating new rapport comment for Rapport Nr: {RapportNr} by user role: {UserRole}, the connection string is  {ConnectionString}",
+            rapportNr, userRole, connectionString);
+        
+        const string query = @"CALL sp_create_new_comment(@rapportDatum, @rapportNr, @text, @gjordAv);";
+
+        await using var dbConnection = new MySqlConnection(connectionString);
+        await dbConnection.OpenAsync();
+
+        var cmd = new MySqlCommand(query, dbConnection);
+    
+ 
+        cmd.Parameters.AddWithValue("@rapportDatum", rapportDatum);
+        cmd.Parameters.AddWithValue("@rapportNr", rapportNr);
+        cmd.Parameters.AddWithValue("@text", text);
+        cmd.Parameters.AddWithValue("@gjordAv", gjordAv);
+
+        await cmd.ExecuteNonQueryAsync();
+    
+        _logger.LogInformation("New rapport comment created successfully for Rapport Nr: {RapportNr}.", rapportNr);
+    }
+    
+    public async Task DeleteRad(DateTime rapportDatum, int rapportNr, int radNr, string userRole)
+    {
+        if (userRole == "agent")
+        {
+            _logger.LogWarning("!!! Unauthorized attempt to remove rapport rad by user role: {UserRole}", userRole);
+            return;
+        }
+        
+        _logger .LogInformation(
+            "->>>>> Removing rapport rad Nr: {RadNr} for Rapport Nr: {RapportNr} by user role: {UserRole}, the connection string is  {ConnectionString}",
+            radNr, rapportNr, userRole, connectionString);
+        
+        const string query = @"
+        DELETE FROM Rapport_Rader
+        WHERE Rapport_Datum = @rapportDatum 
+          AND Rapport_Nr = @rapportNr
+          AND nr = @radNr;";
+
+        await using var dbConnection = new MySqlConnection(connectionString);
+        await dbConnection.OpenAsync();
+
+        var cmd = new MySqlCommand(query, dbConnection);
+    
+ 
+        cmd.Parameters.AddWithValue("@rapportDatum", rapportDatum);
+        cmd.Parameters.AddWithValue("@rapportNr", rapportNr);
+        cmd.Parameters.AddWithValue("@radNr", radNr);
+
+        var rowsAffected = await cmd.ExecuteNonQueryAsync();
+
+        if (rowsAffected < 1)
+        {
+            _logger.LogError("!!! Failed to remove rapport rad Nr: {RadNr} for Rapport Nr: {RapportNr}. No rows were deleted.", radNr, rapportNr);
+            throw new Exception("Failed to remove rapport rad. The operation affected 0 rows.");
+        }
+    
+        _logger.LogInformation("Rapport rad Nr: {RadNr} removed successfully for Rapport Nr: {RapportNr}.", radNr, rapportNr);
+    }
+    
+    public async Task UpdateRad(DateTime rapportDatum, int rapportNr, int radNr, string text, string userRole)
+    {
+        if (userRole == "agent")
+        {
+            _logger.LogWarning("!!! Unauthorized attempt to update rapport rad by user role: {UserRole}", userRole);
+            return;
+        }
+        
+        _logger .LogInformation(
+            "->>>>> Updating rapport rad Nr: {RadNr} for Rapport Nr: {RapportNr} by user role: {UserRole}, the connection string is  {ConnectionString}",
+            radNr, rapportNr, userRole, connectionString);
+        
+        const string query = @"
+        UPDATE Rapport_Rader
+        SET Text = @text
+        WHERE Rapport_Datum = @rapportDatum 
+          AND Rapport_Nr = @rapportNr
+          AND nr = @radNr;";
+
+        await using var dbConnection = new MySqlConnection(connectionString);
+        await dbConnection.OpenAsync();
+
+        var cmd = new MySqlCommand(query, dbConnection);
+    
+ 
+        cmd.Parameters.AddWithValue("@rapportDatum", rapportDatum);
+        cmd.Parameters.AddWithValue("@rapportNr", rapportNr);
+        cmd.Parameters.AddWithValue("@radNr", radNr);
+        cmd.Parameters.AddWithValue("@text", text);
+
+        var rowsAffected = await cmd.ExecuteNonQueryAsync();
+
+        if (rowsAffected < 1)
+        {
+            _logger.LogError("!!! Failed to update rapport rad Nr: {RadNr} for Rapport Nr: {RapportNr}. No rows were updated.", radNr, rapportNr);
+            throw new Exception("Failed to update rapport rad. The operation affected 0 rows.");
+        }
+    
+        _logger.LogInformation("Rapport rad Nr: {RadNr} updated successfully for Rapport Nr: {RapportNr}.", radNr, rapportNr);
+    }
 }
