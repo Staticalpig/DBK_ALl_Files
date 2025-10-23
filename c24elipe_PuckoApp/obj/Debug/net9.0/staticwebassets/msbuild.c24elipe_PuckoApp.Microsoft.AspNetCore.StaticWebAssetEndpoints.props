@@ -4,13 +4,13 @@
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\c24elipe_PuckoApp.z6hmoyssqi.bundle.scp.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
       <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-i6D3TrDS82FfaUGAEuf0W6kv9ese2j/\u002BHuAOWM0P/zQ="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"1086"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022i6D3TrDS82FfaUGAEuf0W6kv9ese2j/\u002BHuAOWM0P/zQ=\u0022"},{"Name":"Last-Modified","Value":"Mon, 20 Oct 2025 23:49:03 GMT"}]]]></ResponseHeaders>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"1086"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022i6D3TrDS82FfaUGAEuf0W6kv9ese2j/\u002BHuAOWM0P/zQ=\u0022"},{"Name":"Last-Modified","Value":"Wed, 22 Oct 2025 22:21:51 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/c24elipe_PuckoApp/c24elipe_PuckoApp.z6hmoyssqi.bundle.scp.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\c24elipe_PuckoApp.z6hmoyssqi.bundle.scp.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
       <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"z6hmoyssqi"},{"Name":"integrity","Value":"sha256-i6D3TrDS82FfaUGAEuf0W6kv9ese2j/\u002BHuAOWM0P/zQ="},{"Name":"label","Value":"_content/c24elipe_PuckoApp/c24elipe_PuckoApp.bundle.scp.css"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"1086"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022i6D3TrDS82FfaUGAEuf0W6kv9ese2j/\u002BHuAOWM0P/zQ=\u0022"},{"Name":"Last-Modified","Value":"Mon, 20 Oct 2025 23:49:03 GMT"}]]]></ResponseHeaders>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"1086"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022i6D3TrDS82FfaUGAEuf0W6kv9ese2j/\u002BHuAOWM0P/zQ=\u0022"},{"Name":"Last-Modified","Value":"Wed, 22 Oct 2025 22:21:51 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/c24elipe_PuckoApp/css/scss/_normalize.4xbwk0yy5x.scss">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\scss\_normalize.scss'))</AssetFile>

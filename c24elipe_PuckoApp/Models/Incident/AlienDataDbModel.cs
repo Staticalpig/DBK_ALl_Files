@@ -1,5 +1,4 @@
 using System.ComponentModel.DataAnnotations;
-using Google.Protobuf.WellKnownTypes;
 
 namespace c24elipe_PuckoApp.Models.Incident;
 
